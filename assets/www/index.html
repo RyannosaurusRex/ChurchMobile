@@ -1,11 +1,54 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>PhoneGap</title>
+    <title>Harvest Community Church</title>
+    <script type="text/javascript" charset="utf-8" src="/js/jquery.jfeed.js"></script>
     <script type="text/javascript" charset="utf-8" src="/js/phonegap.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" />
     <script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
+    <script type="text-javascript">
+        jQuery(function() {
+            jQuery.getFeed({
+                url: 'http://feeds.feedburner.com/harvesttn/allnews',
+                success: function(feed) {
+
+                    jQuery('#result').append('<h2>'
+                    + '<a href="'
+                    + feed.link
+                    + '">'
+                    + feed.title
+                    + '</a>'
+                    + '</h2>');
+
+                    var html = '';
+
+                    for(var i = 0; i < feed.items.length && i < 5; i++) {
+
+                        var item = feed.items[i];
+
+                        html += '<h3>'
+                        + '<a href="'
+                        + item.link
+                        + '">'
+                        + item.title
+                        + '</a>'
+                        + '</h3>';
+
+                        html += '<div class="updated">'
+                        + item.updated
+                        + '</div>';
+
+                        html += '<div>'
+                        + item.description
+                        + '</div>';
+                    }
+
+                    jQuery('#result').append(html);
+                }
+            });
+        });
+    </script>
 </head>
     <body>
         <div data-role="page">
