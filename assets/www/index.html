@@ -2,53 +2,24 @@
 <html>
 <head>
     <title>Harvest Community Church</title>
-    <script type="text/javascript" charset="utf-8" src="/js/jquery.jfeed.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/js/phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" />
-    <script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
-    <script type="text-javascript">
-        jQuery(function() {
-            jQuery.getFeed({
-                url: 'http://feeds.feedburner.com/harvesttn/allnews',
-                success: function(feed) {
-
-                    jQuery('#result').append('<h2>'
-                    + '<a href="'
-                    + feed.link
-                    + '">'
-                    + feed.title
-                    + '</a>'
-                    + '</h2>');
-
-                    var html = '';
-
-                    for(var i = 0; i < feed.items.length && i < 5; i++) {
-
-                        var item = feed.items[i];
-
-                        html += '<h3>'
-                        + '<a href="'
-                        + item.link
-                        + '">'
-                        + item.title
-                        + '</a>'
-                        + '</h3>';
-
-                        html += '<div class="updated">'
-                        + item.updated
-                        + '</div>';
-
-                        html += '<div>'
-                        + item.description
-                        + '</div>';
-                    }
-
-                    jQuery('#result').append(html);
-                }
-            });
-        });
-    </script>
+    <script type="text/javascript" charset="utf-8" src="js/jquery.jfeed.js"></script>
+    <script language="JavaScript">
+        $(function() {
+    		$.ajax({
+				url: "http://feeds.feedburner.com/harvesttn/allnews",
+				success: function(data){
+				$(data).find('item').each(function(){
+					alert($(this).find('title').text());
+				});
+			},
+				dataType: "xml"
+			});
+		});
+	</script>
 </head>
     <body>
         <div data-role="page">
@@ -58,7 +29,7 @@
             <div data-role="header">
                 Latest Updates
             </div>
-            <ul data-role="listview" data-theme="c">
+            <ul id="news-list" data-role="listview" data-theme="c">
                 <li><a href="acura.html">Item 1</a></li>
                 <li><a href="audi.html">Item 2</a></li>
                 <li><a href="bmw.html">Item 3</a></li>
