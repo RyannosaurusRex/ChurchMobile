@@ -11,25 +11,35 @@
 		$(document).ready(function() {
     		$.ajax({
 				url: "http://feeds.feedburner.com/harvesttn/allnews",
-				success: function(data){
-
-				var newsList = $('#news-list');
-				$(data).find('item').each(function(){
-					var title = $(this).find('title').text();
-					var link = $(this).find('link').text();
-					var guid = $(this).find('guid').text();
-					$('#news-list').append('<li><a href="./newsitem.html?id=' + guid + '">' + title + '</a></li>');
-				});
-
-				$('#news-list').listview('refresh');
-			},
-				dataType: "xml"
+				success: function(data)
+				{
+					var newsList = $('#news-list');
+					var count = 0;
+					$(data).find('item').each(function(){
+						var title = $(this).find('title').text();
+						var link = $(this).find('link').text();
+						var body = $(this).find('encoded').text();
+						$('#news-list').append('<li><a href="#pageNewsItem' + count + '">' + title + '</a></li>');
+						var content = '<div data-role="page" id="pageNewsItem' + count +'"><div data-role="header" data-theme="b"><h1>Harvest Community Church</h1></div><div data-role="header"><div id="content" data-role="content">' + body + '</div></div>';
+						$('body').append(content);
+						count++;			
+					});
+	
+					$('#news-list').listview('refresh');
+					
+					//Delegate example
+					$("body").delegate("p", "click", function(){
+				      $(this).after("<p>Another paragraph!</p>");
+				    });
+				
+				},dataType: "xml"
 			});
 		});
 	</script>
 </head>
     <body>
-        <div data-role="page">
+    	
+        <div data-role="page" id="pageNewsList">
             <div data-role="header" data-theme="b">
                 <h1>Harvest Community Church</h1>
             </div>
@@ -39,6 +49,19 @@
             <ul id="news-list" data-role="listview" data-theme="c">
             </ul>
         </div>
-	
+		
+		<div data-role="page" id="pageNewsItem">
+            <div data-role="header" data-theme="b">
+                <h1>Harvest Community Church</h1>
+            </div>
+
+            <div data-role="header">
+                Latest Updates
+            </div>
+
+            <div id="content" data-role="content">
+
+            </div>
+        </div>
     </body>
 </html>
