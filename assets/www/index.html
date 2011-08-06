@@ -2,19 +2,25 @@
 <html>
 <head>
     <title>Harvest Community Church</title>
-    <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" />
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/jquery.jfeed.js"></script>
     <script language="JavaScript">
-        $(function() {
+		$(document).ready(function() {
     		$.ajax({
 				url: "http://feeds.feedburner.com/harvesttn/allnews",
 				success: function(data){
+
+				var newsList = $('#news-list');
 				$(data).find('item').each(function(){
-					alert($(this).find('title').text());
+					var title = $(this).find('title').text();
+					var link = $(this).find('link').text();
+					$('#news-list').append('<li><a href="#">' + title + '</a></li>');
 				});
+
+				$('#news-list').listview('refresh');
 			},
 				dataType: "xml"
 			});
@@ -30,11 +36,8 @@
                 Latest Updates
             </div>
             <ul id="news-list" data-role="listview" data-theme="c">
-                <li><a href="acura.html">Item 1</a></li>
-                <li><a href="audi.html">Item 2</a></li>
-                <li><a href="bmw.html">Item 3</a></li>
             </ul>
         </div>
-
+	
     </body>
 </html>
