@@ -17,7 +17,8 @@
 				$(data).find('item').each(function(){
 					var title = $(this).find('title').text();
 					var link = $(this).find('link').text();
-					$('#news-list').append('<li><a href="#">' + title + '</a></li>');
+					var guid = $(this).find('guid').text();
+					$('#news-list').append('<li><a href="./newsitem.html?id=' + guid + '">' + title + '</a></li>');
 				});
 
 				$('#news-list').listview('refresh');
