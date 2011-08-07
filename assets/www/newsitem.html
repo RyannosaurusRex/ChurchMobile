@@ -14,13 +14,14 @@
     		$.ajax({
 				url: "http://feeds.feedburner.com/harvesttn/allnews",
 				success: function(data){
-				alert('yo');
-				var newsList = $('#news-list');
 				var guid = getURLParameter('guid');
-				alert(guid);
 				$(data).find('item').each(function(){
-					var content = $(this).find('encoded').text();
-					$('#content').append(content);
+					var thisGuid = $(this).find('guid').text();
+					if(thisGuid == guid)
+					{
+						var content = $(this).find('encoded').text();
+						$('#content').append(content);
+					}
 				});
 				$('#content').refresh();
 			},
@@ -45,7 +46,7 @@
                 Latest Updates
             </div>
 
-            <div id="content" data-role="content">
+            <div id="content" data-role="content" data-theme="a">
 
             </div>
         </div>
