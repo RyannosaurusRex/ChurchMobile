@@ -18,7 +18,7 @@
 						var title = $(this).find('title').text();
 						var link = $(this).find('link').text();
 						var guid = $(this).find('guid').text();
-						$('#news-list').append('<li><a href="./newsitem.html?guid=' + guid + '" data-ajax="false">' + title + '</a></li>');
+						$('#news-list').append('<li><a href="./newsitem.html?&guid=' + guid + '" data-ajax="false">' + title + '</a></li>');
 					});
 	
 					$('#news-list').listview('refresh');
@@ -31,14 +31,16 @@
     <body>
     	
         <div data-role="page" id="pageNewsList">
-            <div data-role="header" data-theme="a">
+            <div data-role="header" data-theme="b">
                 <h1>Harvest Community Church</h1>
             </div>
             <div data-role="header">
                 Latest Updates
             </div>
-            <ul id="news-list" data-role="listview" data-theme="a">
-            </ul>
+            <div data-role="content" data-theme="c">
+            	<ul id="news-list" data-role="listview" data-theme="c">
+            	</ul>
+            </div>
         </div>
     </body>
 </html>
