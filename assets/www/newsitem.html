@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Harvest Community Church</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jquery.jfeed.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="js/jquery.superutil.js"></script>
+    <script language="JavaScript">		
+		$(document).ready(function() {
+    		$.ajax({
+				url: "http://feeds.feedburner.com/harvesttn/allnews",
+				success: function(data){
+				alert('yo');
+				var newsList = $('#news-list');
+				var guid = getURLParameter('guid');
+				alert(guid);
+				$(data).find('item').each(function(){
+					var content = $(this).find('encoded').text();
+					$('#content').append(content);
+				});
+				$('#content').refresh();
+			},
+				dataType: "xml"
+			});
+		});
+		
+		function getURLParameter(name) {
+		    return decodeURI(
+		        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+		    );
+		}
+	</script>
+</head>
+<body>
+        <div data-role="page">
+            <div data-role="header" data-theme="b">
+                <h1>Harvest Community Church</h1>
+            </div>
+
+            <div data-role="header">
+                Latest Updates
+            </div>
+
+            <div id="content" data-role="content">
+
+            </div>
+        </div>
+
+    </body>
+</html>

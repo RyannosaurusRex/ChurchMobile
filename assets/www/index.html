@@ -20,7 +20,7 @@
 						var link = $(this).find('link').text();
 						var body = $(this).find('encoded').text();
 						$('#news-list').append('<li><a href="#pageNewsItem' + count + '">' + title + '</a></li>');
-						var content = '<div data-role="page" id="pageNewsItem' + count +'"><div data-role="header" data-theme="b"><h1>Harvest Community Church</h1></div><div data-role="header"><div id="content" data-role="content">' + body + '</div></div>';
+						var content = '<div data-role="page" id="pageNewsItem' + count +'"><div data-role="header" data-theme="b"><h1>Harvest Community Church</h1></div><div id="content" data-role="content">' + body + '</div>';
 						$('body').append(content);
 						count++;			
 					});
@@ -48,20 +48,6 @@
             </div>
             <ul id="news-list" data-role="listview" data-theme="c">
             </ul>
-        </div>
-		
-		<div data-role="page" id="pageNewsItem">
-            <div data-role="header" data-theme="b">
-                <h1>Harvest Community Church</h1>
-            </div>
-
-            <div data-role="header">
-                Latest Updates
-            </div>
-
-            <div id="content" data-role="content">
-
-            </div>
         </div>
     </body>
 </html>
