@@ -8,17 +8,16 @@
     <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/jquery.jfeed.js"></script>
     <script language="JavaScript">
-		$(document).ready(function() {
+		$('#pageNewsList').live('pagecreate',function(event) {
     		$.ajax({
 				url: "http://feeds.feedburner.com/harvesttn/allnews",
 				success: function(data)
 				{
-					var count = 0;
 					$(data).find('item').each(function(){
 						var title = $(this).find('title').text();
 						var link = $(this).find('link').text();
 						var guid = $(this).find('guid').text();
-						$('#news-list').append('<li><a href="./newsitem.html?&guid=' + guid + '" data-ajax="false">' + title + '</a></li>');
+						$('#news-list').append('<li><a href="./newsitem.html?&guid=' + guid + '">' + title + '</a></li>');
 					});
 	
 					$('#news-list').listview('refresh');

@@ -10,7 +10,7 @@
     <script type="text/javascript" charset="utf-8" src="js/jquery.jfeed.js"></script>
     <script type="text/javascript" charset="UTF-8" src="js/jquery.superutil.js"></script>
     <script language="JavaScript">		
-		$(document).ready(function() {
+		$('#pageNewsItem').live('pagecreate',function(event) {
     		$.ajax({
 				url: "http://feeds.feedburner.com/harvesttn/allnews",
 				success: function(data){
@@ -37,7 +37,7 @@
 	</script>
 </head>
 <body>
-        <div data-role="page">
+        <div data-role="page" id="pageNewsItem">
             <div data-role="header" data-theme="b">
             	<a href="./index.html" data-ajax="false" data-icon="back" data-theme="b" class="ui-btn-back">Back</a>
                 <h1>Harvest Community Church</h1>
