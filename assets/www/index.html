@@ -7,25 +7,55 @@
     <script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/jquery.jfeed.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/church-mobile.js"></script>
     <script language="JavaScript">
+        var gfeed = null;
+        var gguid = null;
+        function onItemClick(clickguid)
+        {
+            console.log("in onItemClick()");
+            gguid = clickguid;
+            $.mobile.changePage('#pageNewsItem');
+        };
+
 		$('#pageNewsList').live('pagecreate',function(event) {
     		$.ajax({
                 url: "http://feeds.feedburner.com/harvesttn/allnews",
 				success: function(data)
 				{
+                    gfeed = data;
+                    console.log(gfeed);
 					$(data).find('item').each(function(){
 						var title = $(this).find('title').text();
 						var link = $(this).find('link').text();
 						var guid = $(this).find('guid').text();
-						$('#news-list').append('<li><a href="./newsitem.html?&guid=' + guid + '">' + title + '</a></li>');
+                        var hrefText = "javascript: onItemClick('" + guid + "');"
+                        var appendText = '<li><a href=\"' + hrefText + '\">' + title + '</a></li>';
+                        console.log(appendText);
+						$('#news-list').append(appendText);
 					});
 	
 					$('#news-list').listview('refresh');
                     $('#content').refresh();
 				},dataType: "xml"
 			});
-
 		});
+
+        $('#pageNewsItem').live('pagecreate',function(event) {
+            console.log("We're HERE!!!!!!!!!!!!!!!!!");
+            console.log(gfeed);
+            $(gfeed).find('item').each(function(){
+                var thisGuid = $(this).find('guid').text();
+                console.log(thisGuid + "or" + gguid);
+                if(thisGuid == gguid)
+                {
+                    console.log("Found it!");
+                    var content = $(this).find('encoded').text();
+                    console.log(content);
+                    $('#newsItemContent').append(content);
+                }
+            });
+        });
 	</script>
 </head>
     <body>
@@ -40,6 +70,21 @@
             <div data-role="content" data-theme="c" id="content">
             	<ul id="news-list" data-role="listview" data-theme="c">
             	</ul>
+            </div>
+        </div>
+
+        <div data-role="page" id="pageNewsItem">
+            <div data-role="header" data-theme="b">
+                <a href="./index.html" data-ajax="false" data-icon="back" data-theme="b" class="ui-btn-back">Back</a>
+                <h1>Harvest Community Church</h1>
+            </div>
+
+            <div data-role="header">
+                Latest Updates Page
+            </div>
+
+            <div data-role="content" data-theme="a">
+                <div id="newsItemContent"></div>
             </div>
         </div>
     </body>

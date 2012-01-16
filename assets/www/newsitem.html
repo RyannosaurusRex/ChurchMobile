@@ -16,36 +16,14 @@
 				url: "http://feeds.feedburner.com/harvesttn/allnews",
 				success: function(data)
                 {
-                    var guid = getURLParameter('guid');
-                    $(data).find('item').each(function(){
-                        var thisGuid = $(this).find('guid').text();
-                        if(thisGuid == guid)
-                        {
-                            var content = $(this).find('encoded').text();
-                            $('#content').append(content);
-                            $('#content').refresh();
-                        }
-                    });
+
 			    },dataType: "xml"
 			});
 		});
 	</script>
 </head>
 <body>
-        <div data-role="page" id="pageNewsItem">
-            <div data-role="header" data-theme="b">
-            	<a href="./index.html" data-ajax="false" data-icon="back" data-theme="b" class="ui-btn-back">Back</a>
-                <h1>Harvest Community Church</h1>
-            </div>
 
-            <div data-role="header">
-                Latest Updates
-            </div>
-
-            <div data-role="content" data-theme="a">
-                <div id="content"></div>
-            </div>
-        </div>
 
     </body>
 </html>
