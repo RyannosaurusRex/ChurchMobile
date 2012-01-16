@@ -24,14 +24,12 @@
 				success: function(data)
 				{
                     gfeed = data;
-                    console.log(gfeed);
 					$(data).find('item').each(function(){
 						var title = $(this).find('title').text();
 						var link = $(this).find('link').text();
 						var guid = $(this).find('guid').text();
                         var hrefText = "javascript: onItemClick('" + guid + "');"
                         var appendText = '<li><a href=\"' + hrefText + '\">' + title + '</a></li>';
-                        console.log(appendText);
 						$('#news-list').append(appendText);
 					});
 	
@@ -42,16 +40,13 @@
 		});
 
         $('#pageNewsItem').live('pagecreate',function(event) {
-            console.log("We're HERE!!!!!!!!!!!!!!!!!");
             console.log(gfeed);
             $(gfeed).find('item').each(function(){
                 var thisGuid = $(this).find('guid').text();
                 console.log(thisGuid + "or" + gguid);
                 if(thisGuid == gguid)
                 {
-                    console.log("Found it!");
                     var content = $(this).find('encoded').text();
-                    console.log(content);
                     $('#newsItemContent').append(content);
                 }
             });
