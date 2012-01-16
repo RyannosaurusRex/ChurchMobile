@@ -10,7 +10,7 @@
     <script language="JavaScript">
 		$('#pageNewsList').live('pagecreate',function(event) {
     		$.ajax({
-				url: "http://feeds.feedburner.com/harvesttn/allnews",
+                url: "http://feeds.feedburner.com/harvesttn/allnews",
 				success: function(data)
 				{
 					$(data).find('item').each(function(){
@@ -21,9 +21,10 @@
 					});
 	
 					$('#news-list').listview('refresh');
-				
+                    $('#content').refresh();
 				},dataType: "xml"
 			});
+
 		});
 	</script>
 </head>
@@ -36,7 +37,7 @@
             <div data-role="header">
                 Latest Updates
             </div>
-            <div data-role="content" data-theme="c">
+            <div data-role="content" data-theme="c" id="content">
             	<ul id="news-list" data-role="listview" data-theme="c">
             	</ul>
             </div>
